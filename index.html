@@ -11,10 +11,9 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Estilos del botón: ahora usa margin-left: auto para alinearlo a la derecha */
+    /* Estilos del botón: margin-left: auto para alinearlo a la derecha */
     #print-btn {
       display: block;
-      /* quito el margin horizontal auto y lo reemplazo: */
       margin: 10px 10px 10px auto; /* arriba 10px, derecha 10px, abajo 10px, izquierda auto */
       padding: 10px 15px;
       background-color: #1f77b4;
@@ -30,14 +29,14 @@
       background-color: #155a8a;
     }
 
-    /* El iframe ocupará casi toda la pantalla */
+    /* El iframe ocupará casi toda la pantalla, descontando el espacio para el botón */
     #tally-iframe {
       width: 100%;
-      height: calc(100vh - 60px); /* 60px deja espacio para el botón */
+      height: calc(100vh - 60px); /* 60px deja espacio para el botón en vertical */
       border: none;
     }
 
-    /* Al imprimir, ocultamos el botón y mostramos solo el contenido del iframe */
+    /* Al imprimir: ocultamos el botón y mostramos solo el contenido del iframe */
     @media print {
       #print-btn {
         display: none;
@@ -63,19 +62,18 @@
   <!-- 1. Botón que dispara window.print() -->
   <button id="print-btn">Imprimir esta página</button>
 
-  <!-- 2. Pega aquí tu embed code de Tally EXACTAMENTE como te lo dio -->
+  <!-- 2. Nuevo embed code de Tally (ID: 3qMDYG) -->
   <iframe
-    data-tally-src="https://tally.so/embed/3l9BJN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+    data-tally-src="https://tally.so/embed/3qMDYG?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     id="tally-iframe"
     loading="lazy"
     width="100%"
-    height="1146"
+    height="1123"
     frameborder="0"
     marginheight="0"
     marginwidth="0"
     title="Trámite de Solicitud de Subsidios"
   ></iframe>
-
   <script>
     // Este script se encarga de cargar el iframe de Tally correctamente
     var d = document,
