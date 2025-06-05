@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario Tally con Botón de Imprimir</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Estilos del botón */
+    #print-btn {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 10px 15px;
+      background-color: #1f77b4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10;
+      position: relative;
+    }
+    #print-btn:hover {
+      background-color: #155a8a;
+    }
+
+    /* El iframe ocupará casi toda la pantalla */
+    #tally-iframe {
+      width: 100%;
+      height: calc(100vh - 60px); /* 60px deja espacio para el botón */
+      border: none;
+    }
+
+    /* Al imprimir, ocultamos el botón y mostramos solo el contenido del iframe */
+    @media print {
+      #print-btn {
+        display: none;
+      }
+      body * {
+        visibility: hidden;
+      }
+      #tally-iframe,
+      #tally-iframe * {
+        visibility: visible;
+      }
+      #tally-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Botón que dispara window.print() -->
+  <button id="print-btn">Imprimir esta página</button>
+
+  <!-- 2. Pega aquí tu embed code de Tally EXACTAMENTE como te lo dio -->
+  <iframe
+    data-tally-src="https://tally.so/embed/3l9BJN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+    id="tally-iframe"
+    loading="lazy"
+    width="100%"
+    height="1146"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title="Trámite de Solicitud de Subsidios"
+  ></iframe>
+  <script>
+    // Este script se encarga de cargar el iframe de Tally correctamente
+    var d = document,
+      w = "https://tally.so/widgets/embed.js",
+      v = function () {
+        if (typeof Tally !== "undefined") {
+          Tally.loadEmbeds();
+        } else {
+          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (
+            e
+          ) {
+            e.src = e.dataset.tallySrc;
+          });
+        }
+      };
+    if (typeof Tally !== "undefined") {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = v;
+      d.body.appendChild(s);
+    }
+  </script>
+  <!--
+    NOTA: Si Tally ya agregó esto automáticamente, puedes dejar solo:
+    <script async src="https://tally.so/widgets/embed.js"></script>
+  -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <script>
+    // 3. Al hacer clic en el botón, disparamos el diálogo de impresión
+    document.getElementById("print-btn").addEventListener("click", function () {
+      window.print();
+    });
+  </script>
+</body>
+</html>
+
