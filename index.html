@@ -11,11 +11,11 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Estilos del botón */
+    /* Estilos del botón: ahora usa margin-left: auto para alinearlo a la derecha */
     #print-btn {
       display: block;
-      width: 200px;
-      margin: 10px auto;
+      /* quito el margin horizontal auto y lo reemplazo: */
+      margin: 10px 10px 10px auto; /* arriba 10px, derecha 10px, abajo 10px, izquierda auto */
       padding: 10px 15px;
       background-color: #1f77b4;
       color: white;
@@ -75,6 +75,7 @@
     marginwidth="0"
     title="Trámite de Solicitud de Subsidios"
   ></iframe>
+
   <script>
     // Este script se encarga de cargar el iframe de Tally correctamente
     var d = document,
@@ -100,10 +101,6 @@
       d.body.appendChild(s);
     }
   </script>
-  <!--
-    NOTA: Si Tally ya agregó esto automáticamente, puedes dejar solo:
-    <script async src="https://tally.so/widgets/embed.js"></script>
-  -->
   <script async src="https://tally.so/widgets/embed.js"></script>
 
   <script>
